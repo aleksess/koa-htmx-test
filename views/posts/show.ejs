@@ -1,0 +1,11 @@
+<a href="/posts">Back to Posts</a>
+<%- include("_post.ejs", {post: post}) %>
+
+<a href="/posts/<%= post.id %>/edit"> Edit this post</a>
+<button hx-get="/posts/<%= post.id %>/edit?partial=true" hx-target="#post-<%= post.id %>" hx-swap="outerHTML">Edit this post with htmx</button>
+
+<h3>Add a comment</h3>
+
+<%- include("../comments/_form", {form: {hxMethod: "hx-post", hxAction: `/posts/${post.id}/comments?partial=true`, hxSwap: "beforeend", hxTarget: `#post-${post.id}-comments`}}) %>
+
+<div id="post-<%= post.id %>-comments" hx-get="/posts/<%= post.id %>/comments?partial=true" hx-target="this" hx-swap="innerHTML" hx-trigger="load" ></div>

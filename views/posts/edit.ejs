@@ -1,0 +1,6 @@
+<a href="/posts">Back to Posts</a>
+
+<%- include("_form.ejs", {post, form: {
+    method: "PUT",
+    action: `/posts/${post.id}`
+}}) %>
